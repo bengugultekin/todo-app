@@ -7,6 +7,7 @@ function Form() {
     const [title, setTitle] = useState('');
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
+        if (!title || title.replace(/ /g, '') === '') return;
         e.preventDefault();
         dispatch(addTodo({id: nanoid(), title, completed: false}));
         setTitle('');
