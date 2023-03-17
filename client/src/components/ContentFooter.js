@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeActiveFilter, clearCompleted, selectTodos, selectActiveFilter } from "../redux/todos/todosSlice";
 
@@ -7,6 +7,11 @@ function ContentFooter() {
     const items = useSelector(selectTodos);
     const activeFilter = useSelector(selectActiveFilter);
     const itemsLeft = items.filter((item) => !item.completed).length;
+
+    useEffect(() => {
+        localStorage.setItem('activeFilter', activeFilter);
+    }, [activeFilter]);
+
     return (
         <footer className="footer">
             <span className="todo-count">
